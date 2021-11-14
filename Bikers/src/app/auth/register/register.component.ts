@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Biker } from 'src/app/interfaces/biker.interface';
+import { BikerService } from '../../services/biker.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
+  confPass = '';
 
-  constructor() { }
+  @Input() bikerRegistro:Biker = {
+    _id: '',
+    name: '',
+    email: '',
+    dni: '',
+    phone: '',
+    password: ''
+  }
+  public status: boolean = false;
+  public validacion: boolean = false;
 
-  ngOnInit(): void {
+  constructor(private BikerService:BikerService, private _Router: Router) { }
+
+  guardarBiker(){
+    console.log('registrar motorista con datos:', this.bikerRegistro);
   }
 
 }
