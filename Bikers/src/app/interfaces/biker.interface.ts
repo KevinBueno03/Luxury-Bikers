@@ -4,5 +4,6 @@ export interface Biker {
   email: String;
   dni: String;
   phone: String;
-  password: String
+  password: String;
+  active: Boolean
 }
