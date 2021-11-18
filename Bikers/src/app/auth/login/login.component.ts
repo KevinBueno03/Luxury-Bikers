@@ -8,18 +8,20 @@ import { BikerService } from '../../services/biker.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  validacion = false
   @Input() bikerLogin= {
     email: '',
     password: ''
   };
-  public status: boolean = false;
-  public validacion: boolean = false;
 
   constructor(private BikerService:BikerService, private _Router: Router) { }
 
   iniciarSesion(){
-    console.log('iniciar sesion');
+    this.BikerService.login(this.bikerLogin.email, this.bikerLogin.password)
+    .subscribe( resp =>{
+      console.log(resp);
+    })
+    //console.log('Desea iniciar sesion el comprador con datos:', this.buyerLogin);
   }
 
 }

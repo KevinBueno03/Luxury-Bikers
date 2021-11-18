@@ -9,7 +9,11 @@ import { BikerService } from '../../services/biker.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  confPass = '';
+  public validacionCorreo: boolean = false;
+  public validacionContrasena: boolean = false;
+  public status:boolean = false;
+  public statusForm:boolean = false;
+  public confPass: string = '';
 
   @Input() bikerRegistro:Biker = {
     _id: '',
@@ -17,15 +21,57 @@ export class RegisterComponent {
     email: '',
     dni: '',
     phone: '',
-    password: ''
+    password: '',
+    active: false
   }
-  public status: boolean = false;
-  public validacion: boolean = false;
 
   constructor(private BikerService:BikerService, private _Router: Router) { }
 
   guardarBiker(){
-    console.log('registrar motorista con datos:', this.bikerRegistro);
+    this.validaciones();
+    if(this.statusForm){
+      console.log('registrar motorista con datos:', this.bikerRegistro);
+    }
+  }
+
+  validaciones(){
+    this.validarCorreo(this.bikerRegistro.email);
+    this.validarContrasena();
+    this.validarCampos();
+    if(this.validacionContrasena==true || this.validacionCorreo==true || this.status==true){
+      this.statusForm = false;
+    }else{
+      this.statusForm = true;
+    }
+  }
+
+  validarContrasena(){
+    if(this.bikerRegistro.password != this.confPass){
+      this.validacionContrasena = true;
+    }
+    else{
+      this.validacionContrasena = false;
+    }
+  }
+
+  validarCampos(){
+    if(this.bikerRegistro.name =='' || this.bikerRegistro.password=='' || this.bikerRegistro.email==''
+        || this.confPass == ''){
+      this.status = true;
+    }
+    else{
+      this.status = false;
+    }
+  }
+
+  validarCorreo(correo: string){
+    const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log('correo', regularExpression.test(String(correo).toLowerCase()));
+    if(regularExpression.test(String(correo).toLowerCase())){
+      this.validacionCorreo = false;
+    }else{
+      this.validacionCorreo = true;
+    }
   }
 
 }

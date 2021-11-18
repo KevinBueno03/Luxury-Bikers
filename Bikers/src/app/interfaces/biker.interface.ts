@@ -1,9 +1,13 @@
 export interface Biker {
-  _id: String;
-  name: String;
-  email: String;
-  dni: String;
-  phone: String;
-  password: String;
+  _id: string;
+  name: string;
+  email: string;
+  dni: string;
+  phone: string;
+  password: string;
   active: Boolean
+}
+
+export interface AuthResponse {
+  "session_code"?: string;
 }
