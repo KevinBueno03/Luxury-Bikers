@@ -6,23 +6,16 @@ import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   {
-      path: '**',
-      redirectTo: ''
-  },
-  {
       path: 'login',
-      component: LoginComponent,
-      /* children: [
-        {
-            path: 'recuperacion',
-            component: ,
-            outlet: 'modal'
-        }
-    ] */
+      component: LoginComponent
   },
   {
       path: 'sign-up',
       component: RegisterComponent
+  },
+  {
+      path: '**',
+      redirectTo: ''
   }
 ];
 

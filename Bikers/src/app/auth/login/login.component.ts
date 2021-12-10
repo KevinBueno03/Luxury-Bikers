@@ -21,7 +21,7 @@ export class LoginComponent {
     .subscribe( resp =>{
       console.log(resp);
     })
-    //console.log('Desea iniciar sesion el comprador con datos:', this.buyerLogin);
+    //console.log('Desea iniciar sesion el comprador con datos:', this.bikerLogin);
   }
 
 }
