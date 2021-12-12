@@ -11,7 +11,7 @@ import { Order } from '../interfaces/order.interface';
 })
 
 export class BikerService {
-  private apiBaseUrl: string = environment.baseUrl;
+  private apiBaseUrl: string = environment.BASEURL;
   private _bikerActual = '';
   private _orderActual = '';
 
@@ -64,7 +64,7 @@ export class BikerService {
     const url = `${this.apiBaseUrl}/login?type=biker`;
     const body = { email, password };
 
-    return this.http.post<LoginResponse>( url, body )
+    return this.http.post<LoginResponse>( url, body, {observe:'body'} )
       .pipe(
         tap(resp => {
           if(resp.token){
@@ -97,7 +97,7 @@ export class BikerService {
     //console.log('guardar desde el service');
     const url = `${this.apiBaseUrl}/register-biker`;
 
-    return this.http.post<AuthResponse>( url, {name: body.name, email:body.email, password:body.password} );
+    return this.http.post<any>( url, {name: body.name, email:body.email, password:body.password} );
   }
 
   logout(){
