@@ -27,19 +27,20 @@ export class ShipOrderComponent implements OnInit {
         console.log(res);
         this.biker=res;
         console.log(this.biker);
+        this.orderService.obtenerOrdenesEntregadas(this.biker._id).subscribe(
+          res =>{
+            this.ordenesPagadas=res;
+          },
+          error =>{
+            console.log(error);
+          }
+        );
       },error =>{
         console.log(error);
       }
     )
 
-    this.orderService.obtenerOrdenesPagadasSinTomar().subscribe(
-      res =>{
-        this.ordenesPagadas=res;
-      },
-      error =>{
-        console.log(error);
-      }
-    );
+ 
 
   }
 

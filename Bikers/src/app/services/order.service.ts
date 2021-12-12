@@ -30,5 +30,9 @@ export class OrderService {
     return this.http.get(`${this.APIURL}/orders/biker/${id}`,{})
 }
 
+  obtenerOrdenesEntregadas(id:any):Observable<any>{
+    return this.http.get(`${this.APIURL}/orders/entregadas/${id}`,{})
+}
+
 
 }
