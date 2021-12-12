@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand bg-gris fixed-top shadow">
     <div class="">
         <ul class="navbar-nav mt-2">
-            <li class="nav-item" (ngModel)="orders" style="margin-right: 6%" (click)="cambiarActiveIcon(0)" routerLink="categories">
+            <li class="nav-item" (ngModel)="orders" style="margin-right: 6%" (click)="cambiarActiveIcon(0)" routerLink="orders">
                 <div class="text-center" [ngClass]="{'morad': orders==true, 'grisaceo': orders==false}">
                     <div class="py-0">
                         <i class="fa fa-list-ul fa-2x"></i>
@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="ordTomadas" style="margin-right: 6%" (click)="cambiarActiveIcon(1)" routerLink="orders">
+            <li class="nav-item" (ngModel)="ordTomadas" style="margin-right: 6%" (click)="cambiarActiveIcon(1)" routerLink="taked-order">
                 <div class="text-center" [ngClass]="{'morad': ordTomadas==true, 'grisaceo': ordTomadas==false}">
                     <div class="py-0">
                         <i class="fa fa-shipping-fast fa-2x"></i>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="ordEntregadas" style="margin-right: 9%" (click)="cambiarActiveIcon(1)" routerLink="orders">
+            <li class="nav-item" (ngModel)="ordEntregadas" style="margin-right: 9%" (click)="cambiarActiveIcon(2)" routerLink="ship-order">
                 <div class="text-center" [ngClass]="{'morad': ordEntregadas==true, 'grisaceo': ordEntregadas==false}">
                     <div class="py-0">
                         <i class="fa fa-shipping-fast fa-2x"></i>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item" (ngModel)="perfil" style="margin-right: 14%" (click)="cambiarActiveIcon(2)" routerLink="profile-user">
+            <li class="nav-item" (ngModel)="perfil" style="margin-right: 14%" (click)="cambiarActiveIcon(3)" routerLink="profile">
                 <div class="text-center" [ngClass]="{'morad': perfil==true, 'grisaceo': perfil==false}">
                     <img class="py-0 img-bar">
                     <div class="py-0">

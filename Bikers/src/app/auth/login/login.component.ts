@@ -38,7 +38,7 @@ export class LoginComponent {
     console.log(email,password)
     this.BikerService.login(email,password).subscribe(res =>{
       if(res){
-        this.OrderService.getBiker();
+        
         //this.router.navigateByUrl('app');
         window.location.reload();
       }else {

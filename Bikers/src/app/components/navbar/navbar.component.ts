@@ -10,7 +10,7 @@ import { BikerService } from 'src/app/services/biker.service';
 })
 export class NavbarComponent implements OnInit {
   nombVars = [{"var": true}, {"var": false}, {"var": false}, {"var": false}];
-  paginas = [{"page": 'orders'}, {"page": 'taked-orders'}, {"page": 'ship-orders'}, {"page": 'profile-user'}];
+  paginas = [{"page": 'orders'}, {"page": 'taked-order'}, {"page": 'ship-order'}, {"page": 'profile'}];
 
   orders = this.nombVars[0]['var'];
   ordTomadas = this.nombVars[1]['var'];

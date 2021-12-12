@@ -1,1 +1,99 @@
-<p>taked-order works!</p>
+<div style="margin-top: 90px;"></div>
+
+
+
+<div class="container-fluid">
+
+    <div *ngFor="let orden of ordenesPagadas">
+        <div class="row" style="margin-top: 1rem; margin-left: 1rem;">
+            <div class="col-4">
+                <p> {{orden.companyName}}</p>
+            </div>
+    
+            <div class="col-4">
+    
+               <p style="margin-right: 50px;"> {{orden._id}}</p>
+            </div>
+        
+        </div>
+   
+        
+        <div class="row" style="margin-top: 1rem;">
+            <div class="col-6">
+    
+    
+            </div>
+            <div class="col-6">
+                <td><button type="button" style="margin-left: 15px;"
+                class="btn btn-outline-primary"
+                (click)="openAsignarMotorista(modalDetalleDeOrdenATomar,orden._id,orden)" >seguimiento</button> </td>
+               
+            </div>
+        
+        </div>
+        <hr>
+    </div>
+    
+
+</div>
+
+<ng-template #modalDetalleDeOrdenATomar let-modal>
+    <div class="modal-header" style="background-color: #563D7C;">
+      <h4  style="color: aliceblue; font-size: large;" class="modal-title" id="modal-basic-title"> Detalle Orden</h4>
+      <button  type="button" class="close" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">
+        <span style="color: aliceblue;" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+        <div class="modal-body">
+            <div>
+                <p> Detalles de orden# {{orden._id}} </p>
+            </div>
+            <hr>
+            <div>
+                <p>Recogida de producto:</p>
+                <p>{{orden.compyAddress}}</p>
+            </div>
+            <hr>
+            <h3>Datos de la orden</h3>
+            <div>
+                <p>Cantidad de Productos: {{orden.amountProducts}}</p>
+            </div>
+            <div>
+                <p>Direccion de entrega:{{orden.location.lng }}  {{orden.location.lat }}</p>
+            </div>
+            <div>
+                <p>Referencia de entrega:{{orden.address}}</p>
+                <p></p>
+            </div>
+            <div>
+                <p>Nombre receptor pedido</p>
+                <p>{{orden.buyerName}}</p>
+            </div>
+            <div>
+                <p>Celular de contacto</p>
+                <p>+504 {{orden.phone}}</p>
+            </div>
+            <hr>
+            <div>
+                <h4 style="font-weight: bold;"> Estados de Orden</h4>
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-outline-success" (clikc)="actualizarEstado('En Camino')">En Camino</button>
+                    <button type="button" class="btn btn-outline-success" (clikc)="actualizarEstado('En Origen')">En origen</button>
+                    <button type="button" class="btn btn-outline-success" (clikc)="actualizarEstado('En Destino')">En Destino</button>
+                   
+                  </div>
+            </div>
+        
+        </div>
+    
+    </div>
+    <div class="modal-footer">
+       
+      <button type="button" class="btn btn-primary" (click)="modal.close('Cerrar')">Cerrar</button>
+    </div>
+</ng-template>
+  
+  

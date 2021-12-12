@@ -17,7 +17,7 @@ export class AppComponent {
   ngOnInit() {
     if(this.lS !== null){
       this.onBikerLogged = true;
-      this.OrderService.getBiker();
+      
     }else{
       this.onBikerLogged = false;
     }
