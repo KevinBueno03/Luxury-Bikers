@@ -9,31 +9,29 @@
             <div class="col-4">
                 <p> {{orden.companyName}}</p>
             </div>
-    
+
             <div class="col-4">
-    
-               <p style="margin-right: 50px;"> {{orden._id}}</p>
+
+                <p style="margin-right: 50px;"> {{orden._id}}</p>
             </div>
-        
+
         </div>
-   
-        
+
+
         <div class="row" style="margin-top: 1rem;">
             <div class="col-6">
-    
-    
+
+
             </div>
             <div class="col-6">
-                <td><button type="button" style="margin-left: 15px;"
-                class="btn btn-outline-primary"
-                (click)="openAsignarMotorista(modalDetalleDeOrdenATomar,orden._id,orden)" >detalle</button> </td>
-               
+                <td><button type="button" style="margin-left: 15px;" class="btn btn-outline-primary" (click)="openAsignarMotorista(modalDetalleDeOrdenATomar,orden._id,orden)">detalle</button> </td>
+
             </div>
-        
+
         </div>
         <hr>
     </div>
-    
+
 
 </div>
 
@@ -41,34 +39,34 @@
 
 <ng-template #modalDetalleDeOrdenATomar let-modal>
     <div class="modal-header" style="background-color: #563D7C;">
-      <h4  style="color: aliceblue; font-size: large;" class="modal-title" id="modal-basic-title"> Detalle Orden</h4>
-      <button  type="button" class="close" aria-label="Close"
-        (click)="modal.dismiss('Cross click')">
+        <h4 style="color: aliceblue; font-size: large;" class="modal-title" id="modal-basic-title"> Detalle Orden</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span style="color: aliceblue;" aria-hidden="true">&times;</span>
       </button>
     </div>
-    
+
     <div class="modal-body">
         <div>
-            <h3 > </h3>
+            <h3> </h3>
         </div>
         <h3>Datos de la orden</h3>
         <div>
             <p>Cantidad de Productos: {{orden.amountProducts}}</p>
         </div>
         <div>
-            <p>Direccion de entrega:{{orden.location.lng }}  {{orden.location.lat }}</p>
+            <p>Direccion de entrega:{{orden.location.lng }} {{orden.location.lat }}</p>
+
+            <div class="row" id="mapbox" fxLayoutAlign="center center" style="height: 200px; width: 320px; background-color: white">
+            </div>
         </div>
         <div>
             <p>Referencia de entrega:{{orden.address}}</p>
             <p></p>
         </div>
-    
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="asignarMotoristaAOrden()">tomar orden</button>
-      <button type="button" class="btn btn-primary" (click)="modal.close('Cerrar')">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="modal.close('Cerrar')">Cerrar</button>
     </div>
 </ng-template>
-  
-  
