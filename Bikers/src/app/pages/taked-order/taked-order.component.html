@@ -54,7 +54,7 @@
             <hr>
             <div>
                 <p>Recogida de producto:</p>
-                <p>{{orden.compyAddress}}</p>
+                <p>{{orden.companyAddress}}</p>
             </div>
             <hr>
             <h3>Datos de la orden</h3>
@@ -80,12 +80,79 @@
             <div>
                 <h4 style="font-weight: bold;"> Estados de Orden</h4>
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-outline-success" (clikc)="actualizarEstado('En Camino')">En Camino</button>
-                    <button type="button" class="btn btn-outline-success" (clikc)="actualizarEstado('En Origen')">En origen</button>
-                    <button type="button" class="btn btn-outline-success" (clikc)="actualizarEstado('En Destino')">En Destino</button>
+                    <button type="button" class="btn btn-outline-success" (click)="actualizarEstado('En Camino')">En Camino</button>
+                    <button type="button" class="btn btn-outline-success" (click)="actualizarEstado('En Origen')">En origen</button>
+                    <button type="button" class="btn btn-outline-success" (click)="actualizarEstado('En Destino')
+                    
+                    
+                    ; openDetalleFactura(modalDetalleFactura)">En Destino</button>
                    
                   </div>
             </div>
+        
+        </div>
+    
+    </div>
+    <div class="modal-footer">
+       
+      <button type="button" class="btn btn-primary" (click)="modal.close('Cerrar')">Cerrar</button>
+    </div>
+</ng-template>
+  
+  
+
+<ng-template #modalDetalleFactura let-modal>
+    <div class="modal-header" style="background-color: #563D7C;">
+      <h4  style="color: aliceblue; font-size: large;" class="modal-title" id="modal-basic-title"> Detalle Orden {{orden._id}}</h4>
+      <button  type="button" class="close" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">
+        <span style="color: aliceblue;" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <hr>
+    <div class="modal-body">
+        <div class="modal-body">
+        
+           <div class="row">
+             <div>
+                <table class="table table-striped col-12">
+                    <thead>
+                      <tr>
+                        <th scope="col-2">Producto</th>
+                        <th scope="col-2"> cantidad</th>
+                        <th scope="col-2">total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let product of orden.products ">
+                        <td>{{ product.name}}</td>
+                        <td>{{product.amount}}</td>
+                        <td>  <p style="margin-left: 25px;">{{product.totalPrice}}</p></td>
+                    
+                      </tr>
+                    </tbody>
+                  </table>
+
+            </div>
+           </div>
+
+           <div class="row">
+                <div class="col-12" >
+                    <p>cantidad de articulos: {{orden.amountProducts}}</p>
+                    <p>subtotal: {{orden.subtotal}}</p>
+                    <p>ISV: {{orden.isv}}</p>
+                    <p>comision administrativa: {{orden.commissionAdmin}}
+                    </p>
+                    <p>comision: {{orden.commissionBiker}}</p>
+                    
+                    <div style="margin-top: 25px; margin-left: 100px;">
+
+                        <p>total: L. {{orden.total}}</p>
+                    </div>
+                </div>
+
+           </div>
+           
         
         </div>
     

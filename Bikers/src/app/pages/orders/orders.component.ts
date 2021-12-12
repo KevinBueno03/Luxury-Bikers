@@ -90,8 +90,13 @@ export class OrdersComponent implements OnInit {
   }
 
   asignarMotoristaAOrden(){
+<<<<<<< Updated upstream
 
     this.body={idBiker:this.biker._id,taked:true};
+=======
+  
+    this.body={idBiker:this.biker._id,taked:true,orderStatus:"Tomada"};
+>>>>>>> Stashed changes
     this.orderService.updateOrder(this.idOrdenSeleccionada,this.body).subscribe(res=>{
     if(res){
       this.orderService.obtenerOrdenesPagadasSinTomar().subscribe(

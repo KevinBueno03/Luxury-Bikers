@@ -67,6 +67,54 @@ export class TakedOrderComponent implements OnInit {
 
   }
 
+  openDetalleFactura(modal:any){
+    this.modalService.dismissAll();
+
+    /*
+    this.body={isOnLocation:true};
+    this.orderService.updateOrder(this.idOrdenSeleccionada,this.body).subscribe(res=>{
+    if(res){
+      this.orderService.obtenerOrdenestomadasBiker(this.biker._id).subscribe(
+        res =>{
+          this.ordenesPagadas=res;
+          console.log("hace la actualizacion")
+        }
+        ,
+        error =>{
+          console.log(error);
+        }
+      )
+      }
+    });
+*/
+    this.modalService.open(
+      modal,
+      {
+        size:'xl',
+        centered:true
+      }
+    );
+  }
+
+  actualizarEstado(estado:string){
+    
+    this.body={nameStatus:estado};
+    this.orderService.updateOrder(this.idOrdenSeleccionada,this.body).subscribe(res=>{
+    if(res){
+      this.orderService.obtenerOrdenestomadasBiker(this.biker._id).subscribe(
+        res =>{
+          this.ordenesPagadas=res;
+          console.log("hace la actualizacion")
+        }
+        ,
+        error =>{
+          console.log(error);
+        }
+      )
+      }
+    });
+
+  }
   asignarMotoristaAOrden(){
   
     this.body={idBiker:this.biker._id,taked:true};
