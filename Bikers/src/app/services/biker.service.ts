@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Biker, AuthResponse } from '../interfaces/biker.interface';
+import { Biker, AuthResponse, LoginResponse } from '../interfaces/biker.interface';
+import { Order } from '../interfaces/order.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { Biker, AuthResponse } from '../interfaces/biker.interface';
 export class BikerService {
   private apiBaseUrl: string = environment.baseUrl;
   private _bikerActual = '';
+  private _orderActual = '';
 
   public datosBiker: Biker =
     {
@@ -23,6 +25,26 @@ export class BikerService {
       password: '',
       active: false
     };
+
+    public order: Order={
+      _id: '',
+      idBuyer: '',
+      idBiker: '',
+      products: [],
+      paid: false,
+      subtotal: 0,
+      isv: 0,
+      commission: 0,
+      total: 0,
+      address: '',
+      phone: '',
+      amountProducts: 0,
+      taked: false,
+      nameStatus: '',
+      buyerName: '',
+      location: {}
+    }
+
 
   constructor(private http: HttpClient, private router: Router){}
 
@@ -39,14 +61,14 @@ export class BikerService {
   }
 
   login ( email: string, password: string){
-    const url = `${this.apiBaseUrl}/login?type=buyer`;
+    const url = `${this.apiBaseUrl}/login?type=biker`;
     const body = { email, password };
 
-    return this.http.post<AuthResponse>( url, body )
+    return this.http.post<LoginResponse>( url, body )
       .pipe(
         tap(resp => {
-          if(resp.session_code){
-            localStorage.setItem('token', resp.session_code!);
+          if(resp.token){
+            localStorage.setItem('token', resp.token!);
           }
         }),
         map(resp => true),
@@ -71,11 +93,14 @@ export class BikerService {
       )
   }
 
-  guardarNuevoBiker(biker:Biker) {
+  guardarNuevoBiker(body:any) {
     //console.log('guardar desde el service');
     const url = `${this.apiBaseUrl}/register-biker`;
-    const body = { biker };
 
-    return this.http.post<AuthResponse>( url, body );
+    return this.http.post<AuthResponse>( url, {name: body.name, email:body.email, password:body.password} );
+  }
+
+  logout(){
+    localStorage.clear();
   }
 }

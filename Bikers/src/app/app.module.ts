@@ -7,16 +7,26 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TakedOrderComponent } from './pages/taked-order/taked-order.component';
+import { ShipOrderComponent } from './pages/ship-order/ship-order.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LogSignBarComponent } from './components/log-sign-bar/log-sign-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    OrdersComponent
+    OrdersComponent,
+    NavbarComponent,
+    TakedOrderComponent,
+    ShipOrderComponent,
+    ProfileComponent,
+    LogSignBarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     RouterModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

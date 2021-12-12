@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Biker } from 'src/app/interfaces/biker.interface';
 import { BikerService } from '../../services/biker.service';
 
@@ -9,69 +11,51 @@ import { BikerService } from '../../services/biker.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  public validacionCorreo: boolean = false;
-  public validacionContrasena: boolean = false;
-  public status:boolean = false;
-  public statusForm:boolean = false;
-  public confPass: string = '';
+  submited : boolean = false;
+  registerForm : FormGroup;
 
-  @Input() bikerRegistro:Biker = {
-    _id: '',
-    name: '',
-    email: '',
-    dni: '',
-    phone: '',
-    password: '',
-    active: false
+  constructor(private BikerService:BikerService, private _Router: Router, private fB: FormBuilder, private modalService: NgbModal) {
+    this.registerForm= this.fB.group({
+        name: new FormControl ('',Validators.required),
+        email: new FormControl('',[Validators.required,Validators.email]),
+        password: new FormControl ('',[Validators.required, Validators.minLength(8)]),
+        confPass: new FormControl('',[Validators.required, Validators.minLength(8)]),
+        phone: new FormControl('',[Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
+        HN_ID: new FormControl('',[Validators.required, Validators.minLength(15), Validators.maxLength(15)]),
+      }
+    );
   }
 
-  constructor(private BikerService:BikerService, private _Router: Router) { }
-
-  guardarBiker(){
-    this.validaciones();
-    if(this.statusForm){
-      console.log('registrar motorista con datos:', this.bikerRegistro);
-    }
+  get registerUsuario () {
+    return this.registerForm.controls;
   }
 
-  validaciones(){
-    this.validarCorreo(this.bikerRegistro.email);
-    this.validarContrasena();
-    this.validarCampos();
-    if(this.validacionContrasena==true || this.validacionCorreo==true || this.status==true){
-      this.statusForm = false;
-    }else{
-      this.statusForm = true;
+  onSubmit(){
+    this.submited=true;
+    if(!this.registerForm.valid){
+      return;
     }
   }
 
-  validarContrasena(){
-    if(this.bikerRegistro.password != this.confPass){
-      this.validacionContrasena = true;
+  guardarBiker(content:any){
+    const {name, email,password, confPass } = this.registerForm.value;
+    let buy = {
+      name: name,
+      email: email,
+      password: password
     }
-    else{
-      this.validacionContrasena = false;
-    }
+    //console.log(buy)
+
+    this.BikerService.guardarNuevoBiker(buy)
+      .subscribe(resp=>{
+        console.log(resp);
+        this.modalService.open(content, { centered: true});
+      })
   }
 
-  validarCampos(){
-    if(this.bikerRegistro.name =='' || this.bikerRegistro.password=='' || this.bikerRegistro.email==''
-        || this.confPass == ''){
-      this.status = true;
-    }
-    else{
-      this.status = false;
-    }
+  closeAndRecharge(){
+    this.modalService.dismissAll();
+    this._Router.navigate(['/landing']);
   }
-
-  validarCorreo(correo: string){
-    const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log('correo', regularExpression.test(String(correo).toLowerCase()));
-    if(regularExpression.test(String(correo).toLowerCase())){
-      this.validacionCorreo = false;
-    }else{
-      this.validacionCorreo = true;
-    }
-  }
-
 }
+

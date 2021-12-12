@@ -11,3 +11,8 @@ export interface Biker {
 export interface AuthResponse {
   "session_code"?: string;
 }
+
+export interface LoginResponse {
+  "token"?:string;
+
+}
