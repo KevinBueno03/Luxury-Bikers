@@ -81,11 +81,11 @@ export class BikerService {
     const headers = new HttpHeaders()
     .set('x-access-token', localStorage.getItem('token') || '');
 
-    return this.http.get<AuthResponse>( url, {headers} )
+    return this.http.get<LoginResponse>( url, {headers} )
       .pipe(
         map(resp => {
-          if(resp.session_code){
-            localStorage.setItem('token', resp.session_code!);
+          if(resp.token){
+            localStorage.setItem('token', resp.token!);
           }
           return true
         }),

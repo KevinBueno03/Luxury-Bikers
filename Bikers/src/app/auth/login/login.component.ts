@@ -35,6 +35,7 @@ export class LoginComponent {
 
   login(){
     const {email,password} = this.loginForm.value;
+    console.log(email,password)
     this.BikerService.login(email,password).subscribe(res =>{
       if(res){
         this.OrderService.getBiker();
